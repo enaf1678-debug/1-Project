@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nabiha | Next-Level Interactive Portfolio</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==================== ZARA HAT KE COLOR PALETTE (NO BLUE) ==================== */
+        :root {
+            --bg-primary: #0d0914;       /* Ultra Dark Velvet Charcoal */
+            --bg-secondary: #181124;     /* Deep Violet Night Card */
+            --bg-card-hover: #231834;    /* Card Hover Glow Violet */
+            --accent-color: #d946ef;     /* Vibrant Neon Fuchsia/Magenta */
+            --accent-glow: rgba(217, 70, 239, 0.3);
+            --accent-hover: #c026d3;     /* Darker Fuchsia */
+            --secondary-accent: #a855f7; /* Electric Purple */
+            --text-main: #fcf8ff;        /* Crisp Soft Pearl */
+            --text-muted: #a195b0;       /* Muted Violet Grey */
+            --border-color: #2e2042;     /* Neon Violet Border */
+        }
+        /* CHANGE HERE: Smooth scroll ke liye yeh sab se top par add karein */
+html {
+    scroll-behavior: smooth;
+}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ==================== NAVBAR ==================== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.1rem 6%;
+            background-color: rgba(24, 17, 36, 0.85);
+            backdrop-filter: blur(14px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.8rem;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.5rem 0.9rem;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-color);
+            background-color: rgba(217, 70, 239, 0.12);
+            border: 1px solid rgba(217, 70, 239, 0.2);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* ==================== SECTIONS ==================== */
+        section {
+            padding: 4.5rem 8%;
+            display: block; /* Purana line 'display: none' yahan se hata di hai */
+            min-height: 80vh;
+        }
+
+        section.active-section {
+            display: block;
+            animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-size: 1rem;
+        }
+
+        .title-accent {
+            color: var(--accent-color);
+            text-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        /* ==================== HOME / HERO ==================== */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            min-height: 70vh;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(217, 70, 239, 0.1);
+            color: var(--accent-color);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .hero-text h1 {
+            font-size: 3.3rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero-text p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Floating Image Box */
+        .hero-img-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 200px;
+        }
+
+        .hero-img-box {
+            width: 320px;
+            height: 320px;
+            border-radius: 24px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 20px var(--accent-glow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            animation: floatAnimation 4s ease-in-out infinite;
+        }
+
+        @keyframes floatAnimation {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-14px) rotate(1deg); }
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+            justify-items: center;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 25px -5px var(--accent-glow);
+        }
+
+        .stat-card h3 {
+            font-size: 2.2rem;
+            color: var(--accent-color);
+            font-weight: 800;
+        }
+
+        .stat-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ==================== HIGHLY INTERACTIVE CARDS ==================== */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width:100%;           /* Cards ko zyada चौड़ा (wide) hone se rokne ke liye */
+             margin: 0 ;
+            align-items: stretch;
+            justify-items: start;
+            padding: o 2rem;
+        }
+
+        .card {
+            background-color: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 1.8rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            min-height: 380px;
+            width: 100%;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), var(--secondary-accent), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background-color: var(--bg-card-hover);
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 35px -10px var(--accent-glow);
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        /* Buttons Styling */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.85rem 1.6rem;
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-accent));
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px var(--accent-glow);
+            filter: brightness(1.1);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--border-color);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--border-color);
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* Image Placeholder Box */
+        .img-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: var(--bg-primary);
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .img-placeholder img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            background: white;
+            padding: 10px;
+        }
+
+        .card:hover .img-placeholder {
+            border-color: var(--accent-color);
+            box-shadow: inset 0 0 15px var(--accent-glow);
+        }
+
+        .img-placeholder i {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        /* ==================== SKILLS PROGRESS BARS ==================== */
+        .skill-group {
+            margin-bottom: 1rem;
+        }
+
+        .skill-group-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-item {
+            margin-bottom: 1.2rem;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: var(--bg-primary);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--secondary-accent));
+            border-radius: 10px;
+            transition: width 1.2s ease-in-out;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: rgba(217, 70, 239, 0.08);
+            border: 1px solid var(--border-color);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ==================== CV SECTION ==================== */
+        .cv-container {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .cv-frame {
+            width: 100%;
+            height: 550px;
+            background: #ffffff;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #334155;
+            border: 2px solid var(--border-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            .hero-text p {
+                margin: 0 auto 2rem auto;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR (EDUCATION REMOVED) -->
+    <!-- NAVBAR -->
+<nav class="navbar">
+    <h1 class="title-accent">Portfolio</h1>
+    <ul class="nav-links">
+        <!-- CHANGE HERE: Sabhi links me onclick ki jagah href="#..." lagaya hai -->
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certificates">Certificates</a></li>
+        <li><a href="#jobs">Jobs</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#cv">CV</a></li>
+    </ul>
+</nav>
+
+    <!-- 1. HOME SECTION -->
+    <section id="home" class="hero">
+        <div class="hero">
+            <div class="hero-text">
+                <div class="hero-badge"><i class="fa-solid fa-sparkles"></i> Available for Opportunities</div>
+                <h1>Hi, I'm <span class="title-accent">Emaan</span><br>Web Developer & AI  Analyst</h1>
+                <p>Passionate about building responsive, full-stack web applications and analyzing complex data structures. Certified in Google AI Essentials & Data Analytics.</p>
+                
+                <div class="hero-buttons">
+                   <a href="#projects" class="btn"><i class="fa-solid fa-code"></i> Explore Projects</a>
+                    <a href="./Assest/Marron et Blanc Moderne CV (3).pdf" download class="btn btn-outline"><i class="fa-solid fa-download"></i> Download CV</a>
+                  
+                </div>
+            </div>
+
+            <div class="hero-img-container">
+                <div class="hero-img-box" >
+                    <img src="./Assest/images (1).jfif" style="width: 400px;height: 320px;">
+                    
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- 2. SKILLS SECTION -->
+    <section id="skills">
+        <h2 class="section-title">Technical <span class="title-accent">&nbsp Skills </span></h2>
+        <div style="margin-top:0.5rem;"></div>
+        <p>A display of my technical expertise, core competencies, and software proficiencies.</p>
+<div style="margin-top:2rem;"></div>
+        <div class="grid-container">
+            <div class="card">
+                <div class="img-placeholder">
+                    <img src="./Assest/web-development-programming-resized.jpg"  style="height: 300px; width: 550px;">
+                    
+                   
+                </div>
+                <div class="skill-group">
+                    <div class="skill-group-title"><i class="fa-solid fa-code"></i> Web Development</div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info"><span>HTML5, CSS3, Bootstrap</span><span>92%</span></div>
+                        <div class="progress-bar"><div class="progress" style="width: 92%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>PHP & MySQL Database</span><span>85%</span></div>
+                        <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>JavaScript (DOM / ES6)</span><span>78%</span></div>
+                        <div class="progress-bar"><div class="progress" style="width: 78%;"></div></div>
+                    </div>
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">Frontend</span><span class="tag">Backend</span><span class="tag">Database</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="img-placeholder">
+                <img src="./Assest/business-data-analysis_53876-95296.avif"  style="height: 265px; width: 550px;">
+                    
+                </div>
+                <div class="skill-group">
+                    <div class="skill-group-title"><i class="fa-solid fa-chart-pie"></i> Google Analytics </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Excel</span><span>88%</span></div>
+                        <div class="progress-bar"><div class="progress" style="width: 88%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Mysql</span><span>84%</span></div>
+                        <div class="progress-bar"><div class="progress" style="width: 84%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Power BI</span><span>70%</span></div>
+                        <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+                    </div>
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">Data Cleaning</span><span class="tag">Data Processing</span><span class="tag"> Data Visuals</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="img-placeholder">
+                   <img src="./Assest/AI"style="height: 265px; width: 550px;" >
+                </div>
+             <div class="skill-group">
+    <div class="skill-group-title"><i class="fa-solid fa-robot"></i> AI & Data Science</div>
+    
+    <div class="skill-item">
+        <div class="skill-info"><span>Machine Learning</span><span>82%</span></div>
+        <div class="progress-bar"><div class="progress" style="width: 82%;"></div></div>
+    </div>
+    <div class="skill-item">
+        <div class="skill-info"><span>Generative AI Solutions</span><span>80%</span></div>
+        <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+    </div>
+    <div class="skill-item">
+        <div class="skill-info"><span>Prompt Engineering</span><span>86%</span></div>
+        <div class="progress-bar"><div class="progress" style="width: 86%;"></div></div>
+    </div>
+</div>
+<div class="skill-tags">
+    <span class="tag">Python</span><span class="tag">Deep Learning</span><span class="tag">Data Analysis</span>
+</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <!-- 3. PROJECTS SECTION -->
+<section id="projects">
+    <h2 class="section-title">Featured <span class="title-accent"> &nbsp Projects</span></h2>
+  <div style="margin-top:0.5rem;"></div>
+  <p>A gallery showcasing my real-world web development builds, applications, and interactive creations.</p>
+    <div style="margin-top:2rem;"></div>
+
+    <div class="grid-container">
+        <!-- Card 1: E-Commerce -->
+        <div class="card">
+          <div class="figma-badge">
+            <img src="./Assest/istockphoto-1925416245-612x612.webp" style="height: 300px; width: 550px;">
+             <div style="margin-top:0.5rem;"></div>
+              <h3>Acme E-Commerce Platform</h3>  
+            </div>
+       <div style="margin-top:0.5rem;"></div>
+
+            <p>Full-stack online shopping platform built using PHP, MySQL database, and HTML/CSS/Bootstrap frontend.</p>
+            <div style="margin-top:1.5rem;">
+                <a href="https://demo.vercel.store" target="_blank" class="btn" style="width:100%; justify-content:center;">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Preview Project
+        </a>
+            </div>
+        </div>
+
+        <!-- Card 2: Portfolio -->
+        <div class="card">
+              <img src="./Assest/Project" style="height: 300px; width: 550px;">
+               <div style="margin-top:0.5rem;"></div>
+                <h3>Portfolio Website Screenshot</h3>
+            
+             <div style="margin-top:0.5rem;"></div>
+            <p>Modern responsive portfolio with dynamic section management, custom cards, and API integrations.</p>
+            <div style="margin-top:1.5rem;">
+                <a href="https://react-portfolio-v2.netlify.app" target="_blank" class="btn" style="width:100%; justify-content:center;">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Preview Project
+                </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- 4. CERTIFICATES SECTION -->
+    <section id="certificates">
+        <h2 class="section-title">Coursera <span class="title-accent">&nbsp Certificates</span></h2>
+       <div style="margin-top:0.5rem;"></div>
+       <p>Official certifications and achievements verifying my technical training and completed qualifications.</p>
+        <div style="margin-top:2rem;"></div>
+
+        <div class="grid-container">
+            <!-- Card 1 -->
+            <div class="card">
+                <a href="https://coursera.org/verify/specialization/LY6W5B6FB7SP" target="_blank" class="img-placeholder">
+                    <img src="./Assest/Coursera.png" alt="Google AI Essentials Certificate">
+                </a>
+                <h3>Google AI Essentials</h3>
+                <p>Practical certification focused on AI fundamentals, prompt engineering ,leveraging AI tools to automate workflows and enhance workplace.</p>
+                <div style="margin-top:1rem;">
+                    <a href="https://coursera.org/share/6cc988c9e4b36e61e8f5bf200b29f148" target="_blank" style="text-decoration: none;">
+                        <button class="btn btn-outline" style="width: 100%; justify-content:center; cursor:pointer;">
+                            <i class="fa-solid fa-expand"></i> View Full Certificate
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card">
+                <a href="https://coursera.org/verify/U7IQY759L75Z" target="_blank" class="img-placeholder">
+                    <img src="./Assest/Coursera_2.png" alt="Maximize Productivity With AI Tools">
+                </a>
+                <h3>Maximize Productivity With AI Tools</h3>
+                <p>Professional certification covering the end-to-end data analysis process from raw data cleaning to deriving actionable insights and visuals.</p>
+                <div style="margin-top:1rem;">
+                    <a href="https://coursera.org/verify/U7IQY759L75Z" target="_blank" style="text-decoration: none;">
+                        <button class="btn btn-outline" style="width: 100%; justify-content:center; cursor:pointer;">
+                            <i class="fa-solid fa-expand"></i> View Full Certificate
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. JOBS SECTION (WITH DIRECT "VIEW JOB" REDIRECT LINKS) -->
+<section id="jobs" class="active-section">
+    <h2 class="section-title">Job <span class="title-accent">&nbsp;Openings</span> </h2>
+    <div style="margin-top:0.5rem;"></div>
+    <p>My practical work history, roles handled, and professional experience in the industry.</p>
+      <div style="margin-top:2rem;"></div>
+
+    <div id="jobs-container" class="grid-container">
+        <!-- Dynamic content via JavaScript -->
+        <p style="color:var(--text-muted);">Fetching dynamic jobs from API...</p>
+    </div>
+</section>
+    <!-- ABOUT & CONTACT SECTION (MATCHED WITH JOBS SECTION STYLE) -->
+<section id="about">
+        <h2 class="section-title">About <span class="title-accent">&nbsp Me </span></h2>
+        <div style="margin-top:0.5rem;"></div>
+        <p>An overview of my background, personal story, and passion for building modern web applications.</p>
+         <div style="margin-top:2rem;"></div>
+
+    <div class="about-container grid-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; align-items: start; max-width: 1100px; margin: 0 auto;">
+        
+        <!-- LEFT COLUMN: Profile & Info Card -->
+        <div class="card" style="padding: 2rem;">
+            <div class="about-image-wrapper" style="position: relative; text-align: center; margin-bottom: 1.5rem;">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&auto=format&fit=crop" 
+                     alt="Workspace" 
+                     style="width: 100%; height: 220px; object-fit: cover; border-radius: 8px;">
+                
+                <div style="position: absolute; bottom: -12px; right: 15px; background: var(--accent-color, #d946ef); color: #fff; padding: 6px 16px; border-radius: 20px; font-weight: 600; font-size: 0.8rem;">
+                    <i class="fa-solid fa-code"></i> Developer
+                </div>
+            </div>
+
+            <div class="card-header" style="display:flex; align-items:center; gap:12px; margin-bottom:1rem;">
+                <div class="card-icon" style="width:45px; height:45px; border-radius:12px; background:rgba(217, 70, 239, 0.15); color:var(--accent-color, #d946ef); display:flex; align-items:center; justify-content:center; font-size:1.3rem;">
+                    <i class="fa-solid fa-address-card"></i>
+                </div>
+                <div>
+                    <h3 style="margin: 0; font-size: 1.25rem; font-weight: 700;">Emaan</h3>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Web Developer & Tech Enthusiast</span>
+                </div>
+            </div>
+
+            <p style="line-height: 1.6; font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1.2rem;">
+                I am a dedicated developer based in <strong>Faisalabad, Pakistan</strong>. Passionate about building modern, responsive web applications, working with full-stack technologies, and exploring 3D web features.
+            </p>
+
+            <!-- Skill Tags -->
+            <div class="about-tags" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                <span class="tag"><i class="fa-brands fa-html5"></i> Frontend</span>
+                <span class="tag"><i class="fa-solid fa-database"></i> PHP & MySQL</span>
+                <span class="tag"><i class="fa-solid fa-cubes"></i> 3D Web Design</span>
+            </div>
+
+            <!-- Quick Stats Grid -->
+            <div class="about-stats" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; background: rgba(255, 255, 255, 0.03); padding: 12px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05);">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-location-dot" style="color: var(--accent-color, #d946ef);"></i>
+                    <span style="font-size: 0.82rem; font-weight: 600;">Faisalabad, PK</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-certificate" style="color: var(--accent-color, #d946ef);"></i>
+                    <span style="font-size: 0.82rem; font-weight: 600;">Google Certified</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Interactive Question Form -->
+        <div class="card" style="padding: 2rem;">
+            <div style="margin-bottom: 1.5rem;">
+                <h3 style="margin: 0 0 6px 0; font-size: 1.25rem; font-weight: 700;">Have a Question?</h3>
+                <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted);">
+                    Feel free to ask anything about my projects or collaborate on a new idea.
+                </p>
+            </div>
+
+            <!-- Complete Integrated Form -->
+            <form id="questionForm" action="https://formsubmit.co/enaf1698@gmail.com" method="POST" onsubmit="handleMessageSubmit(event)" style="display: flex; flex-direction: column; gap: 1rem;">
+                
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="New Portfolio Question Received!">
+
+                <div>
+                    <label style="display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 6px; color: var(--text-muted);">Your Name</label>
+                    <input type="text" id="userName" name="Name" placeholder="Enter your full name" required style="width: 100%; padding: 12px 14px; border-radius: 8px; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255,255,255,0.1); color: #fff; outline: none; font-size: 0.9rem; transition: all 0.3s;" onfocus="this.style.borderColor='var(--accent-color)';" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+                </div>
+
+                <div>
+                    <label style="display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 6px; color: var(--text-muted);">Your Email</label>
+                    <input type="email" id="userEmail" name="Email" placeholder="name@example.com" required style="width: 100%; padding: 12px 14px; border-radius: 8px; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255,255,255,0.1); color: #fff; outline: none; font-size: 0.9rem; transition: all 0.3s;" onfocus="this.style.borderColor='var(--accent-color)';" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+                </div>
+
+                <div>
+                    <label style="display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 6px; color: var(--text-muted);">Your Question / Message</label>
+                    <textarea id="userMsg" name="Message" rows="4" placeholder="What would you like to ask?" required style="width: 100%; padding: 12px 14px; border-radius: 8px; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255,255,255,0.1); color: #fff; outline: none; font-size: 0.9rem; resize: none; transition: all 0.3s;" onfocus="this.style.borderColor='var(--accent-color)';" onblur="this.style.borderColor='rgba(255,255,255,0.1)'"></textarea>
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn" style="width: 100%; justify-content: center; padding: 12px; font-weight: 600; font-size: 0.95rem; cursor: pointer;">
+                    <i class="fa-solid fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+
+            <!-- Success Output Box -->
+            <div id="outputBox" style="display: none; margin-top: 1.5rem; background: rgba(217, 70, 239, 0.15); border: 1px solid var(--accent-color, #d946ef); border-radius: 8px; padding: 1rem; color: #fff;">
+                <h4 style="margin: 0 0 8px 0; color: var(--accent-color, #d946ef); font-size: 1rem; font-weight: 700;">Message Received! ✨</h4>
+                <p style="margin: 4px 0; font-size: 0.85rem;"><strong>From:</strong> <span id="outName"></span> (<span id="outEmail"></span>)</p>
+                <p style="margin: 4px 0; font-size: 0.85rem;"><strong>Message:</strong> <span id="outMsg"></span></p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- JavaScript Integration -->
+<script>
+function handleMessageSubmit(event) {
+    // 1. Input values fetch karna
+    const name = document.getElementById('userName').value;
+    const email = document.getElementById('userEmail').value;
+    const msg = document.getElementById('userMsg').value;
+
+    // 2. Output Box me text update karna
+    document.getElementById('outName').innerText = name;
+    document.getElementById('outEmail').innerText = email;
+    document.getElementById('outMsg').innerText = msg;
+
+    // 3. Screen par success card display karna
+    document.getElementById('outputBox').style.display = 'block';
+
+    // Note: FormSubmit API background me mail bhej dega automatically.
+}
+</script>
+</section>
+
+    <!-- 7. CV SECTION -->
+    <section id="cv">
+        <h2 class="section-title">Curriculum Vitae <span class="title-accent">(CV)</span></h2>
+        <div style="margin-top:0.5rem;"></div>
+        <p>A downloadable summary detailing my complete academic credentials, skill set, and career history.</p>
+         <div style="margin-top:2rem;"></div>
+
+        <div class="cv-container">
+            <h3>My Professional Resume</h3>
+            <p style="color:var(--text-muted); margin-top:5px;">Click below to download or view the document preview.</p>
+
+            <div style="margin-top: 1.5rem;">
+                <a href="./Assest/Marron et Blanc Moderne CV (3).pdf" download class="btn"><i class="fa-solid fa-file-arrow-down"></i> Download PDF CV</a>
+            </div>
+
+            <div class="cv-frame">
+                <div>
+                    
+                    <i class="fa-solid fa-file-pdf" style="font-size: 3.5rem; color: var(--accent-color);"></i>
+                    <p style="margin-top: 10px; font-weight: 600;">CV PDF Document Window</p>
+                    <small style="color: var(--text-muted);">(Embed your `CV.pdf` or image file inside this frame)</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JAVASCRIPT FOR PAGE SWITCHING & JOB REDIRECTIONS -->
+    <!-- JAVASCRIPT FOR PAGE SWITCHING & JOB REDIRECTIONS -->
+<script>
+    function showSection(sectionId) {
+        // Hide all sections
+        const sections = document.querySelectorAll('section');
+        sections.forEach(sec => sec.classList.remove('active-section'));
+
+        // Deactivate nav links
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => link.classList.remove('active'));
+
+        // Show selected section
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.classList.add('active-section');
+        }
+        
+        const targetNav = document.getElementById('nav-' + sectionId);
+        if (targetNav) {
+            targetNav.classList.add('active');
+        }
+
+        // Scroll to top smooth
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Trigger Job API when Jobs tab is opened
+        if (sectionId === 'jobs') {
+            loadJobsFromAPI();
+        }
+    }
+
+    // Job API Loader Function with Direct Redirection URLs
+    function loadJobsFromAPI() {
+        const container = document.getElementById('jobs-container');
+        if (!container) return;
+
+        const sampleJobs = [
+            {
+                title: "Frontend Web Developer",
+                company: "Tech Systems",
+                location: "Remote / Hybrid",
+                desc: "Requires HTML5, CSS3, Bootstrap, and JavaScript DOM skills to craft UI interfaces.",
+                jobUrl: "https://www.linkedin.com/jobs/search/?keywords=Frontend%20Developer",
+                imageUrl: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&auto=format&fit=crop"
+            },
+            {
+                title: "PHP & MySQL Back-End Developer",
+                company: "Digital Solutions",
+                location: "Faisalabad, PK",
+                desc: "Maintain backend database structures, handle API endpoints, and optimize web applications.",
+                jobUrl: "https://pk.indeed.com/jobs?q=PHP+Developer",
+                imageUrl: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=500&auto=format&fit=crop"
+            },
+            {
+                title: "Data Analyst & Visualizer",
+                company: "Analytics Co.",
+                location: "Remote",
+                desc: "Perform data cleaning, create dashboards, and apply Google Analytics methodologies.",
+                jobUrl: "https://www.glassdoor.com/Job/data-analyst-jobs-SRCH_KO0,12.htm",
+                imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&auto=format&fit=crop"
+            }
+        ];
+
+        container.innerHTML = ""; // Clear loading text
+
+        sampleJobs.forEach(job => {
+            const jobCard = `
+                <div class="card">
+                    <img src="${job.imageUrl}" alt="${job.title}" style="width:100%; height:160px; object-fit:cover; border-radius:8px 8px 0 0;">
+                    
+                    <div style="padding: 1rem;">
+                        <h3>${job.title}</h3>
+                        <p style="color:var(--accent-color); font-weight:700; font-size:0.9rem; margin-bottom:8px;">${job.company} - ${job.location}</p>
+                        <p style="font-size:0.9rem; color:var(--text-muted);">${job.desc}</p>
+                        <div style="margin-top:1.2rem;">
+                            <a href="${job.jobUrl}" target="_blank" class="btn" style="width:100%; justify-content:center; padding:0.6rem 1rem; font-size:0.85rem; text-decoration:none;">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> View Job
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += jobCard;
+        });
+    }
+
+    // Direct initial execution on page load
+    document.addEventListener("DOMContentLoaded", function() {
+        loadJobsFromAPI();
+    });
+</script>
+
+<!-- FOOTER SECTION -->
+<footer style= "color:var(--accent-color);
+            background-color: rgba(36, 10, 40, 0.12);
+            border: 1px solid rgba(39, 17, 43, 0.2);
+            box-shadow: 0 0 15px var(--accent-glow); padding: 3rem 1rem 1.5rem; border-top: 1px solid rgba(24, 23, 23, 0.1);">
+    <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2.5rem; margin-bottom: 2.5rem;">
+        
+        <!-- Column 1: About & Status -->
+        <div>
+           
+            <p style="color: var(--text-muted, #888); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;">
+                Passionate Web Developer building interactive, modern, and high-performance web experiences.
+            </p>
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(217, 70, 239, 0.1); padding: 6px 12px; border-radius: 20px; border: 1px solid var(--accent-color, #d946ef);">
+                <span style="height: 8px; width: 8px; background-color:  #d946ef; border-radius: 50%; display: inline-block;"></span>
+                <span style="font-size: 0.85rem; color:  #d946ef; font-weight: 500;">Available for projects</span>
+            </div>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div>
+            <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; color: var(--accent-color, #d946ef);">Quick Links</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.6rem;">
+                <li><a href="#home" style="color: var(--text-muted, #aaa); text-decoration: none; font-size: 0.95rem; transition: 0.3s;">Home</a></li>
+                <li><a href="#about" style="color: var(--text-muted, #aaa); text-decoration: none; font-size: 0.95rem; transition: 0.3s;">About Me</a></li>
+                <li><a href="#projects" style="color: var(--text-muted, #aaa); text-decoration: none; font-size: 0.95rem; transition: 0.3s;">Projects</a></li>
+                <li><a href="#certificates" style="color: var(--text-muted, #aaa); text-decoration: none; font-size: 0.95rem; transition: 0.3s;">Certificates</a></li>
+                <li><a href="#jobs" style="color: var(--text-muted, #aaa); text-decoration: none; font-size: 0.95rem; transition: 0.3s;">Jobs</a></li>
+            
+            </ul>
+        </div>
+
+        <!-- Column 3: Social Connections -->
+        <div>
+            <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; color: var(--accent-color, #d946ef);">Connect</h4>
+            <p style="color: var(--text-muted, #888); font-size: 0.95rem; margin-bottom: 1rem;">Feel free to reach out for collaborations or opportunities.</p>
+            <div style="display: flex; gap: 1rem;">
+                <a href="https://github.com" target="_blank" style="color: #fff; background: rgba(255,255,255,0.05); padding: 8px 14px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.1);">GitHub</a>
+                <a href="https://linkedin.com" target="_blank" style="color: #fff; background: rgba(255,255,255,0.05); padding: 8px 14px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.1);">LinkedIn</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div style="max-width: 1100px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center; color: var(--text-muted, #666); font-size: 0.85rem;">
+        <p>&copy; 2026  All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
